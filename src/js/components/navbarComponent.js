@@ -47,7 +47,7 @@ class NavbarComponent extends React.Component {
 
                 </Nav>
                 <Nav pullRight>
-                     <NavItem eventKey={5} href="user.html"> 
+                     <NavItem eventKey={5}> 
                         <div className={'selected-navigation-item'}>
                             <strong>User Survey</strong>
                         </div>

@@ -9,6 +9,7 @@ import Holdings from './pages/holdings.js';
 import Transactions from './pages/transactions.js';
 import Performance from './pages/performance.js';
 import AssetAllocation from './pages/assetAllocation';
+import MySurvey from './pages/survey.js';
 
 /*
 const Header = () => {
@@ -16,7 +17,7 @@ const Header = () => {
 };
 */
 
-const PAGES = [<Overview />, <Holdings />, <AssetAllocation />, <Transactions />, <Performance />];
+const PAGES = [<Overview />, <Holdings />, <AssetAllocation />, <Transactions />, <Performance />, <MySurvey />];
 
 // function actualPage() {
 //     if (TABACTIVE= 1) {

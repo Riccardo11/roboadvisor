@@ -1,3 +1,9 @@
+import React from 'react';
+import * as Survey from 'survey-react';
+
+Survey.Survey.cssType = "bootstrap";
+Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+
 const json_survey = {
 	questions: [{
 		name: "birthdate",
@@ -129,6 +135,19 @@ survey
             .innerHTML = "result: " + JSON.stringify(result.data);
     });
 
-$(document).ready(function() {
-	$("#survey").Survey({model: survey});
-});
+class MySurvey extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return(
+			<div>
+				<div id="surveyResult" />
+				<Survey.Survey model={survey} />
+			</div>
+		);
+	}
+}
+
+export default MySurvey
