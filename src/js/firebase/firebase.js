@@ -12,8 +12,21 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function getrefData() {
-    return firebase.database().ref('/exon-data').once('value');
+// security: name of the security to download
+// tag: "values" for shares-type or "data" for the last values
+function getrefData(security,tag) {
+    switch(tag) {
+        case 'data':
+            return (firebase.database().ref('/'/*+security+'data'*/)
+                        .once('value'));
+            // return firebase.database().ref('/'+security+'/'+security+'data').limitToLast(1000)
+            //             .once('value');
+        case 'values':
+            return (firebase.database().ref('/'+security+'values')
+                        .once('value'));
+        default:
+            console.log("Error in parameters to retreive data from Firebase");      
+    }
 }
 
 export default getrefData

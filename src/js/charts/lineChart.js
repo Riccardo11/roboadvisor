@@ -2,51 +2,110 @@ import Chart from 'chart.js';
 import getrefData from '../firebase/firebase.js';
 import maxDrawdown from '../lib/maxDrawdown.js';
 
+function calculateNav(allSeries, shares) {
+    // create an array of 0s
+    // must be long as the longest series
+    let nav = Array.apply(null, Array(allSeries[0].length))
+                .map(Number.prototype.valueOf,0);
+
+    allSeries.forEach(function (series, nSeries) {
+        series.forEach(function (data,i) {
+            nav[i] = nav[i] + data*shares[nSeries];
+        });
+    });
+    console.log(nav);
+    return nav;
+}
 
 function navChart(account, updateNavData) {
     const ctx = document.getElementById('nav-chart');
 
-    getrefData().then(
-        function(snap) {
+    // parameters are not useful.. remove them
+    getrefData('exon','data').then(
+        function (snap) {
+
             // retreive data from Firebase
-            const real_data_objects = snap.val();
+            const data = snap.val();
+
+            // #### Exon Part ####
+
+            const exonDataArray = Object.values(Object.values(data)[0])[0];
 
             // extract x values
-            let x_values = real_data_objects.map(
+            let xExon = exonDataArray.map(
                 function(elem) {
                     return Object.values(elem)[0];
-                });
+                }
+            );
 
-            x_values = x_values.slice(8000,9000);
+            xExon = xExon.slice(xExon.length-1000,xExon.length);
+
             // extract y values
-            let y_values = real_data_objects.map(
+            let yExon = exonDataArray.map(
                 function(elem) {
                     return Object.values(elem)[1];
-                });
-            y_values = y_values.slice(8000,9000);
+                }
+            );
+
+            yExon = yExon.slice(yExon.length-1000,yExon.length);
+
+            // get shares of Exon
+            const sharesExon = Object.values(Object.values(Object.values(data)[0])[1])[0];
+            console.log(sharesExon);
+
+            // #### Google Part ####
+
+            const googleDataArray = Object.values(Object.values(data)[1])[0];
+
+            // extract x values
+            let xGoogle = googleDataArray.map(
+                function(elem) {
+                    return Object.values(elem)[0];
+                }
+            );
+
+            xGoogle = xGoogle.slice(xGoogle.length-1000,xGoogle.length);
+
+            // extract y values
+            let yGoogle = googleDataArray.map(
+                function(elem) {
+                    return Object.values(elem)[1];
+                }
+            );
+
+            yGoogle = yGoogle.slice(yGoogle.length-1000,yGoogle.length); 
+
+            // get shares of Google
+            const sharesGoogle = Object.values(Object.values(Object.values(data)[1])[1])[0];
+
+
+            // ### Calculate NAV ###           
+
+            const nav = calculateNav([yExon,yGoogle],[sharesExon,sharesGoogle]);
 
 
             // calculate max drawdown values
             // maxDrawdownData[0] --> max drawdown value
             // maxDrawdownData[1] --> max drawdown begin
             // maxDrawdownData[2] --> max drawdown end
-            const maxDrawdownData = maxDrawdown(y_values);
+            const maxDrawdownData = maxDrawdown(nav);
 
             // calculate points corresponding to max drawdown
-            const maxDrawdownpoints = y_values.map(function(elem,i) {
+            const maxDrawdownpoints = nav.map(function(elem,i) {
                 return (i >= maxDrawdownData[1] && i <= maxDrawdownData[2]) ? elem : NaN;
             });
 
             //callback to overview to update nav values
             updateNavData(
-                y_values[y_values.length-1],
-                (maxDrawdownData[0]*100).toFixed(2));
+                nav[nav.length-1],
+                (maxDrawdownData[0]*100).toFixed(2)
+            );
 
             // draw chart
             return (new Chart(ctx, {
                 type: 'line',
                 data : {
-                    labels: x_values,
+                    labels: xExon,
                     datasets: 
                         [{
                             label: 'Max Drawdown',
@@ -55,10 +114,9 @@ function navChart(account, updateNavData) {
                             backgroundColor: 'rgba(0, 0, 0, 0)',
                             fill: false,
                             lineTension: 0,
-                            //tooltips: false
                         },{
                             label: 'NAV',
-                            data: y_values,
+                            data: nav,
                             borderColor: 'blue',
                             backgroundColor: 'rgba(0, 0, 0, 0)',
                             fill: false,
@@ -79,6 +137,7 @@ function navChart(account, updateNavData) {
                     tooltips: {
                         mode: 'index',
                         intersect: false,
+                        // don't show tooltips for Maxdrawdown serie
                         filter: function (tooltipItem, data) {
                             if (tooltipItem.datasetIndex == 0) {
                                 return false;

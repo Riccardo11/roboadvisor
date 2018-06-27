@@ -1,10 +1,19 @@
 import Chart from 'chart.js';
 import 'chart.piecelabel.js';
+import getrefData from '../firebase/firebase.js';
 
 // const ctx = document.getElementById("pie-chart");
 // console.log(ctx);
 
-export default function myChart(account) {
+function myChart(account) {
+
+    getrefData('exon','values').then(
+        function (snap) {
+            console.log(snap.val().shares);
+            console.log(snap.val().type);
+        }
+    );
+
     const ctx = document.getElementById("pie-chart");
     console.log(account);
     return (new Chart(ctx, {
@@ -41,3 +50,5 @@ export default function myChart(account) {
             }
         }
     }))};
+
+export default myChart
