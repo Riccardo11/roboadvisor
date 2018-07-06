@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import RiskTolerance from '../../icons/RiskTolerance.png'
 
 class NavbarComponent extends React.Component {
     constructor(props) {
@@ -47,10 +48,13 @@ class NavbarComponent extends React.Component {
 
                 </Nav>
                 <Nav pullRight>
-                     <NavItem eventKey={5}> 
+                    <NavItem eventKey={5}>
                         <div className={'selected-navigation-item'}>
                             <strong>User Survey</strong>
                         </div>
+                    </NavItem>
+                    <NavItem eventKey={6}>
+                        <img src={RiskTolerance} height={35}/>
                     </NavItem>
                 </Nav>
             </Navbar>
@@ -58,4 +62,4 @@ class NavbarComponent extends React.Component {
     }
 }
 
-export default NavbarComponent;
+export default NavbarComponent

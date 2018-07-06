@@ -4,7 +4,7 @@ module.exports = {
   entry: {
     app: './src/js/index.js'
   },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   devServer: {
     contentBase: './docs',
     host: '0.0.0.0'

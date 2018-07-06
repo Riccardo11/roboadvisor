@@ -60,3 +60,18 @@
     background-color: #18a689;
     color: #fff;
 }
+
+.survey_section {
+    background-color: limegreen;
+}
+
+input {
+  display: inline;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #cfcfcf;
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 16px;
+  outline: none;
+}
