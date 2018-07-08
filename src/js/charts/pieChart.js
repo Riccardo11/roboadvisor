@@ -2,10 +2,13 @@ import Chart from 'chart.js';
 import 'chart.piecelabel.js';
 import getrefData from '../firebase/firebase.js';
 
+// Chart.defaults.global.responsive = true;
+// Chart.defaults.global.maintainAspectRatio = false;
+
 // const ctx = document.getElementById("pie-chart");
 // console.log(ctx);
 
-function myChart(account) {
+function myChart(account, isForSummary) {
 
     getrefData('exon','values').then(
         function (snap) {
@@ -15,11 +18,14 @@ function myChart(account) {
     );
 
     const ctx = document.getElementById("pie-chart");
+    if (isForSummary) {
+        ctx.height=100;
+    }
     console.log(account);
     return (new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Bond","Equity","FX","High Yield"],
+            labels: ["Government Bond","Equity","Cash","High Yield"],
             datasets: [{
                 label: 'Nav for every asset type',
                 data: [12000, 17000, 25000, 31000],

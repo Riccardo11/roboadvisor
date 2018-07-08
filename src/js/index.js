@@ -11,17 +11,13 @@ import Performance from './pages/performance.js';
 import AssetAllocation from './pages/assetAllocation';
 import MySurvey from './pages/survey.js';
 import Surveys from './pages/surveys.js';
+import SurveyResult from './pages/surveyResult.js';
 
 /*
 const Header = () => {
     return <h1 style={{color: "#cc0000"}}> RoboAdvisor Unipd </h1>;
 };
 */
-
-const PAGES = [<Overview />, <Holdings />, 
-               <AssetAllocation />, <Transactions />,
-               <Performance />, <MySurvey />,
-               <Surveys />];
 
 // function actualPage() {
 //     if (TABACTIVE= 1) {
@@ -111,13 +107,21 @@ class Header extends React.Component {
 // };
 
 class Index extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {pageActive: 0};
         this.setPage = this.setPage.bind(this);
+        this.PAGES = [<Overview />, <Holdings />, 
+                      <AssetAllocation />, <Transactions />,
+                      <Performance />, <MySurvey />,
+                      <Surveys setPage={this.setPage}/>, <SurveyResult />]
     }
 
-    setPage(page) {
+    setPage(page, riskProfile) {
+        if (! isNaN(riskProfile)) {
+            this.PAGES[page] = <SurveyResult riskProfile={riskProfile} />
+        }
         this.setState({
             pageActive: page
         });
@@ -135,7 +139,7 @@ class Index extends React.Component {
                     </Row>
                     <Row className="show-grid">
                         <Col>
-                            {PAGES[this.state.pageActive]}
+                            {this.PAGES[this.state.pageActive]}
                         </Col>
                     </Row>
                 </Grid>

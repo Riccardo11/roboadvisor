@@ -16,7 +16,7 @@ class AssetAllocation extends React.Component {
                 account: event.target.text
             },
             () => {                             // second parameter for setState: callback when state updated
-                myChart(this.state.account);
+                myChart(this.state.account, false);
             }
         );
     }
