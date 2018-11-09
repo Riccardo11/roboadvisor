@@ -2,6 +2,9 @@ import React from 'react';
 import {Table, DropdownButton, MenuItem, Grid, Row, Col} from 'react-bootstrap';
 import navChart from '../charts/lineChart.js';
 import rendimentiTrimestraliChart from '../charts/rendimentiTrimestrali.js';
+import rendimentiVolatilitaChart from '../charts/rendimentiVolatilita.js';
+import perditaMassimaStoricaChart from '../charts/perditaMassimaStorica.js';
+// import extraRendimentoChart from '../charts/extraRendimento.js';
 
 const NAVMESSAGE = "Click this line to see the NAV";
 
@@ -39,6 +42,10 @@ class Overview extends React.Component {
                 // chart here
                 if (this.state.my_chart) this.state.my_chart.destroy()
                 navChart(this.state.account, this.updateNavData, this.state.amount_of_data);
+                rendimentiTrimestraliChart()
+                rendimentiVolatilitaChart()
+                perditaMassimaStoricaChart()
+                // extraRendimentoChart()
                 console.log(this.state.account);
             }
         );
@@ -55,13 +62,8 @@ class Overview extends React.Component {
                 console.log("ciao");
                 this.state.my_chart.destroy();
             }
-            console.log("qui")
-            if (this.state.amount_of_data <= 3)
-                navChart(this.state.account, this.updateNavData, this.state.amount_of_data);
-            else {
-                this.setState({maxdrawdown: ''});   
-                rendimentiTrimestraliChart()
-            }
+            navChart(this.state.account, this.updateNavData, this.state.amount_of_data);
+
         });
     }
 
@@ -104,7 +106,6 @@ class Overview extends React.Component {
                         <MenuItem eventKey="1" onSelect={this.handleClickAmount}> Andamento per intero </MenuItem>
                         <MenuItem eventKey="2" onSelect={this.handleClickAmount}> Ultime 30 rilevazioni </MenuItem>
                         <MenuItem eventKey="3" onSelect={this.handleClickAmount}> Ultime 60 rilevazioni </MenuItem>
-                        <MenuItem eventKey="4" onSelect={this.handleClickAmount}> Rendimenti trimestrali di periodo </MenuItem>
                     </DropdownButton>
                 </div>
 
@@ -118,42 +119,57 @@ class Overview extends React.Component {
 
                             <canvas id="nav-chart" className={'component ' + (this.state.maxdrawdown=='' ? 'hidden' : 'visible')}>
                             </canvas>
-
-                            <canvas id="rend-chart" className={'component ' + (this.state.amount_of_data <= '3' ? 'hidden' : 'visible')}>
-                            </canvas>
                         </Col>
                         <Col md={3}>
                             <div className={'component ' + (this.state.account=='' ? 'hidden' : 'visible')}>
                                 <Table striped bordered>
                                     <thead>
                                         <tr>
-                                            <th> Beginning Value </th>
-                                            <td> 0.00$ </td>
+                                            <th>
+                                                Analisi Comparativa
+                                            </th>
                                         </tr>
                                         <tr>
-                                            <th> Ending Value </th>
-                                            <td> 15000.00$ </td>
+                                            <th>  </th>
+                                            <th> Nav </th>
                                         </tr>
                                         <tr>
-                                            <th> Deposit </th>
-                                            <td> 15.00$ </td>
+                                            <th> Performance </th>
+                                            <td> -0,668 </td>
                                         </tr>
                                         <tr>
-                                            <th> Withdrawals</th>
-                                            <td> 20.00$ </td>
+                                            <th> Volatilità </th>
+                                            <td> 16,727 </td>
                                         </tr>
                                         <tr>
-                                            <th className="success"> Weekly Gain </th>
-                                            <td className="success"> <b>10%</b> </td>
+                                            <th> Ind. Sharpe </th>
+                                            <td> -0,001 </td>
                                         </tr>
-                                        <tr>    
-                                            <th className="danger"> Monthly Gain </th>
-                                            <td className="danger"> <b>-5%</b> </td> 
+                                        <tr>
+                                            <th> TEV </th>
+                                            <td> 9,272 </td>
                                         </tr>
-                                        <tr>    
-                                            <th className="success"> Yearly Gain </th>
-                                            <td className="success"> <b>8%</b> </td> 
+                                        <tr>
+                                            <th> Alfa </th>
+                                            <td> -0,0633 </td>
                                         </tr>
+                                        <tr>
+                                            <th> Beta </th>
+                                            <td> 1,2159 </td>
+                                        </tr>
+                                        <tr>
+                                            <th> Correlazione </th>
+                                            <td> 0,846 </td>
+                                        </tr>
+                                        <tr>
+                                            <th> Info Ratio </th>
+                                            <td> -0,090 </td>
+                                        </tr>
+                                        <tr>
+                                            <th> Recovery period (gg) </th>
+                                            <td> 26 </td>
+                                        </tr>                                        
+
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -164,6 +180,28 @@ class Overview extends React.Component {
                             </div>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col md={6}>
+                            <canvas id="rend-chart" className={'component ' + (this.state.account == '' ? 'hidden' : 'visible')}>
+                            </canvas>
+                        </Col>
+                        <Col md={6}>
+                            <canvas id="rend-vol-chart" className={'component '+ (this.state.account == '' ? 'hidden' : 'visible')}>
+                            </canvas>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <canvas id="perdita-chart" className={'component '+ (this.state.account == '' ? 'hidden' : 'visible')}>
+                            </canvas>
+                        </Col>
+                    </Row>
+                    {/*<Row>
+                        <Col>
+                            <canvas id="extra-rend-chart" className={'component '+ (this.state.account == '' ? 'hidden' : 'visible')}>
+                            </canvas>
+                        </Col>
+                    </Row>*/}
                 </Grid>
             </div>
         );
