@@ -8,7 +8,7 @@ import getrefData from '../firebase/firebase.js';
 // const ctx = document.getElementById("pie-chart");
 // console.log(ctx);
 
-function myChart(account, isForSummary) {
+function myChart(account, isForSummary, updateTableFun) {
 
     getrefData('exon','values').then(
         function (snap) {
@@ -45,15 +45,20 @@ function myChart(account, isForSummary) {
             }]
         },
         options: {
+            responsive: true,
             pieceLabel: {
                 render: 'percentage',
                 fontSize: 15,
                 fontStyle: 'bold',
             },
+            legend: {
+                position: 'left'
+            },
             title: {
                 display: true,
                 text: account + ' - NAV for every asset type'
-            }
+            },
+            onClick: updateTableFun
         }
     }))};
 

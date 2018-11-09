@@ -17,7 +17,22 @@ function calculateNav(allSeries, shares) {
     return nav;
 }
 
-function navChart(account, updateNavData) {
+function convertAmountOfData(amountOfData) {
+    switch(amountOfData) {
+        case "1":
+            return 1000;
+        case "2":
+            return 30;
+        case "3":
+            return 60;
+        default:
+            alert("Errore nella richesta dell'ammontare di dati")
+            break;
+    }
+}
+
+// amountOfData: 1=whole serie, 2=last 30, 3=last 60
+function navChart(account, updateNavData, amountOfData) {
     const ctx = document.getElementById('nav-chart');
 
     // parameters are not useful.. remove them
@@ -38,7 +53,9 @@ function navChart(account, updateNavData) {
                 }
             );
 
-            xExon = xExon.slice(xExon.length-1000,xExon.length);
+            const amount = convertAmountOfData(amountOfData)
+
+            xExon = xExon.slice(xExon.length-amount,xExon.length);
 
             // extract y values
             let yExon = exonDataArray.map(
@@ -47,7 +64,7 @@ function navChart(account, updateNavData) {
                 }
             );
 
-            yExon = yExon.slice(yExon.length-1000,yExon.length);
+            yExon = yExon.slice(yExon.length-amount,yExon.length);
 
             // get shares of Exon
             const sharesExon = Object.values(Object.values(Object.values(data)[0])[1])[0];
@@ -64,7 +81,7 @@ function navChart(account, updateNavData) {
                 }
             );
 
-            xGoogle = xGoogle.slice(xGoogle.length-1000,xGoogle.length);
+            xGoogle = xGoogle.slice(xGoogle.length-amount,xGoogle.length);
 
             // extract y values
             let yGoogle = googleDataArray.map(
@@ -73,7 +90,7 @@ function navChart(account, updateNavData) {
                 }
             );
 
-            yGoogle = yGoogle.slice(yGoogle.length-1000,yGoogle.length); 
+            yGoogle = yGoogle.slice(yGoogle.length-amount,yGoogle.length); 
 
             // get shares of Google
             const sharesGoogle = Object.values(Object.values(Object.values(data)[1])[1])[0];
@@ -95,14 +112,9 @@ function navChart(account, updateNavData) {
                 return (i >= maxDrawdownData[1] && i <= maxDrawdownData[2]) ? elem : NaN;
             });
 
-            //callback to overview to update nav values
-            updateNavData(
-                nav[nav.length-1],
-                (maxDrawdownData[0]*100).toFixed(2)
-            );
 
             // draw chart
-            return (new Chart(ctx, {
+            let myChart = new Chart(ctx, {
                 type: 'line',
                 data : {
                     labels: xExon,
@@ -165,7 +177,13 @@ function navChart(account, updateNavData) {
                         }]
                     }
                 }
-            }));                
+            });
+            //callback to overview to update nav values
+            updateNavData(
+                nav[nav.length-1],
+                (maxDrawdownData[0]*100).toFixed(2),
+                myChart
+            );
         }
     )
 }

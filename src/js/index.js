@@ -130,12 +130,12 @@ class Index extends React.Component {
 
     render() {
         return(
-            <div className='background'>
+            <div>
                 <Header />
-                <Grid>
+                <Grid className="background">
                     <Row className="show-grid">
                          {/*   <NavBar /> */}
-                         <NavbarComponent setPage={this.setPage}/>
+                         <NavbarComponent setPage={this.setPage} />
                     </Row>
                     <Row className="show-grid">
                         <Col>

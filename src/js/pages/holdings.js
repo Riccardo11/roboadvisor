@@ -26,7 +26,7 @@ class Holdings extends React.Component {
                         <th> Actual Market Value </th>
                         <th> Historical Volatility </th>
                         {/*<th> ??? </th>*/}
-                        <th> Sharp Ratio </th>
+                        <th> Sharpe Ratio </th>
                     </tr>
                 </thead>
             </Table>
