@@ -73,6 +73,15 @@
   height: 500px !important;
 }
 
+.asset-bar {
+  height: 15px;
+  display: inline-block;
+}
+
+a:hover {
+  background-color: gray
+}
+
 input {
   display: inline;
   margin-bottom: 15px;
