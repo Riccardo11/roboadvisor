@@ -89,7 +89,7 @@ class AssetAllocation extends React.Component {
                                 <hr />
                                 <div className={"component " + (((this.state.asset_selected== 'all') || (this.state.asset_selected == 'Government Bond')) ? 'visible' : 'hidden')}>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="bond-a" href="#"> Holding bond a </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-a" href="#"> Holding bond a </a> </Col> 
                                         <Col md={4}> 
                                             11% 
                                             <span className={"asset-bar"}
@@ -119,7 +119,7 @@ class AssetAllocation extends React.Component {
                                         </div>
                                     </Collapse>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="bond-b" href="#"> Holding bond b </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-b" href="#"> Holding bond b </a> </Col> 
                                         <Col md={4}> 
                                             3%
                                             <span className={"asset-bar"}
@@ -152,7 +152,7 @@ class AssetAllocation extends React.Component {
 
                                 <div  className={"component " + (this.state.asset_selected== 'all' || this.state.asset_selected == 'Cash' ? 'visible' : 'hidden')}>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="cash-a" href="#"> Holding cash a </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="cash-a" href="#"> Holding cash a </a> </Col> 
                                         <Col md={4}> 
                                             9% 
                                             <span className={"asset-bar"}
@@ -182,7 +182,7 @@ class AssetAllocation extends React.Component {
                                         </div>
                                     </Collapse>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="cash-b" href="#"> Holding bond b </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="cash-b" href="#"> Holding bond b </a> </Col> 
                                         <Col md={4}> 
                                             20%
                                             <span className={"asset-bar"}
@@ -215,7 +215,7 @@ class AssetAllocation extends React.Component {
 
                                 <div  className={"component " + (this.state.asset_selected== 'all' || this.state.asset_selected == 'High Yield' ? 'visible' : 'hidden')}>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="hy-a" href="#"> Holding HY a </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="hy-a" href="#"> Holding HY a </a> </Col> 
                                         <Col md={4}> 
                                             13% 
                                             <span className={"asset-bar"}
@@ -245,7 +245,7 @@ class AssetAllocation extends React.Component {
                                         </div>
                                     </Collapse>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="hy-b" href="#"> Holding HY b </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="hy-b" href="#"> Holding HY b </a> </Col> 
                                         <Col md={4}> 
                                             23%
                                             <span className={"asset-bar"}
@@ -278,7 +278,7 @@ class AssetAllocation extends React.Component {
 
                                 <div  className={"component " + (this.state.asset_selected== 'all' || this.state.asset_selected == 'Equity' ? 'visible' : 'hidden')}>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="equity-a" href="#"> Holding Equity a </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="equity-a" href="#"> Holding Equity a </a> </Col> 
                                         <Col md={4}> 
                                             15% 
                                             <span className={"asset-bar"}
@@ -308,7 +308,7 @@ class AssetAllocation extends React.Component {
                                         </div>
                                     </Collapse>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a id="equity-b" href="#"> Holding Equity b </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="equity-b" href="#"> Holding Equity b </a> </Col> 
                                         <Col md={4}> 
                                             14%
                                             <span className={"asset-bar"}

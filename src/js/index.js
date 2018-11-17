@@ -4,6 +4,7 @@ import {Grid, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/style.css';
 import NavbarComponent from './components/navbarComponent';
+import Home from './pages/home.js'
 import Overview from './pages/overview.js';
 import Holdings from './pages/holdings.js';
 import Transactions from './pages/transactions.js';
@@ -27,12 +28,18 @@ const Header = () => {
 
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col sm={6} md={5}>
-                        <h1 className="title"> RoboAdvisor Unipd </h1>
+                        <a href="#" onClick={() => this.props.setPage(6)}>
+                            <h1 className="title"> RoboAdvisor Unipd </h1>
+                        </a>
                     </Col>
                     {/*<Col sm={6} md={5}>
                                             <Button bsStyle="info" className="pull-right surveyButton"> User Survey </Button>
@@ -110,12 +117,13 @@ class Index extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {pageActive: 0};
+        this.state = {pageActive: 6};
         this.setPage = this.setPage.bind(this);
-        this.PAGES = [<Overview />, <Holdings />, 
+        this.PAGES = [<Overview />,
                       <AssetAllocation />, <Transactions />,
-                      <Performance />, <MySurvey />,
-                      <Surveys setPage={this.setPage}/>, <SurveyResult />]
+                      <Performance />,
+                      <Surveys setPage={this.setPage}/>, <SurveyResult />,
+                      <Home setPage={this.setPage} />]
     }
 
     setPage(page, riskProfile) {
@@ -131,9 +139,9 @@ class Index extends React.Component {
     render() {
         return(
             <div>
-                <Header />
+                <Header setPage={this.setPage}/>
                 <Grid className="background">
-                    <Row className="show-grid">
+                    <Row className={this.state.pageActive == 6 ? 'hidden' : 'visible'}>
                          {/*   <NavBar /> */}
                          <NavbarComponent setPage={this.setPage} />
                     </Row>

@@ -31,46 +31,25 @@ class NavbarComponent extends React.Component {
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
-                            {/*<LinkContainer to="/holdings" exact={true}>*/}
+                            {/*<LinkContainer to="/assetallocation" exact={true}>*/}
                                 <NavItem eventKey={1}> 
                                     <div className={this.state.pageActive==1 ? 'selected-navigation-item' : ''}>
-                                        <strong>Holdings/PNL</strong>
-                                    </div>
-                                </NavItem>
-                            {/*</LinkContainer>*/}
-                            {/*<LinkContainer to="/assetallocation" exact={true}>*/}
-                                <NavItem eventKey={2}> 
-                                    <div className={this.state.pageActive==2 ? 'selected-navigation-item' : ''}>
                                         <strong>Asset Allocation</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/transactions" exact={true}>*/}
-                                <NavItem eventKey={3}> 
-                                    <div className={this.state.pageActive==3 ? 'selected-navigation-item' : ''}>
+                                <NavItem eventKey={2}> 
+                                    <div className={this.state.pageActive==2 ? 'selected-navigation-item' : ''}>
                                         <strong>Transactions</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/performance" exact={true}>*/}
-                                <NavItem eventKey={4}> 
-                                    <div className={this.state.pageActive==4 ? 'selected-navigation-item' : ''}>
+                                <NavItem eventKey={3}> 
+                                    <div className={this.state.pageActive==3 ? 'selected-navigation-item' : ''}>
                                         <strong>Performance</strong>
                                     </div>
-                                </NavItem>
-                            {/*</LinkContainer>*/}
-                        </Nav>
-                        <Nav pullRight>
-                            {/*<LinkContainer to="/mysurvey" exact={true}>*/}
-                                <NavItem eventKey={5}>
-                                    <div className={'selected-navigation-item'}>
-                                        <strong>User Survey</strong>
-                                    </div>
-                                </NavItem>
-                            {/*</LinkContainer>*/}
-                            {/*<LinkContainer to="/surveys" exact={true}>*/}
-                                <NavItem eventKey={6}>
-                                    <img src={RiskTolerance} height={25}/>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                         </Nav>
