@@ -8,7 +8,7 @@ import RiskTolerance from '../../icons/RiskTolerance.png';
 class NavbarComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {pageActive: 0};
+        this.state = {pageActive: props.pageActive};
         this.changePage = this.changePage.bind(this);
     }
 
@@ -26,28 +26,28 @@ class NavbarComponent extends React.Component {
                         <Nav>
                             {/*<LinkContainer to="/overview" exact={true}>*/}
                                 <NavItem eventKey={0}> 
-                                    <div className={this.state.pageActive==0 ? 'selected-navigation-item' : ''}>
+                                    <div className={(this.props.getPage() == 0) ? 'selected-navigation-item' : ''}>
                                         <strong>Overview</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/assetallocation" exact={true}>*/}
                                 <NavItem eventKey={1}> 
-                                    <div className={this.state.pageActive==1 ? 'selected-navigation-item' : ''}>
+                                    <div className={(this.props.getPage() == 1) ? 'selected-navigation-item' : ''}>
                                         <strong>Asset Allocation</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/transactions" exact={true}>*/}
                                 <NavItem eventKey={2}> 
-                                    <div className={this.state.pageActive==2 ? 'selected-navigation-item' : ''}>
+                                    <div className={(this.props.getPage() == 2) ? 'selected-navigation-item' : ''}>
                                         <strong>Transactions</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/performance" exact={true}>*/}
                                 <NavItem eventKey={3}> 
-                                    <div className={this.state.pageActive==3 ? 'selected-navigation-item' : ''}>
+                                    <div className={(this.props.getPage() == 3) ? 'selected-navigation-item' : ''}>
                                         <strong>Performance</strong>
                                     </div>
                                 </NavItem>

@@ -18,6 +18,10 @@ class AssetAllocation extends React.Component {
 
     }
 
+    componentDidMount() {
+        myChart(this.state.account, false, this.updateTable);
+    }
+
 
     updateTable(event, array) {
         const assetId = array[0]["_index"]
@@ -54,23 +58,23 @@ class AssetAllocation extends React.Component {
     render() {
         return (
             <Grid className="background">
-                <Row>
+                {/*<Row>
                     <div>
                         <div className="component">
                             <DropdownComponent getInfo={this.getAccount} />
                         </div>
                     </div>
-                </Row>
+                </Row>*/}
                 <Row>
                     <Col md={5}>
                         <div>
-                            <canvas id="pie-chart" className={'component ' + (this.state.account=='' ? 'hidden' : 'visible')}>
+                            <canvas id="pie-chart" className={'component '}>
                             </canvas>
                         </div>
                     </Col>
                     <Col md={7}>
                         <div style={{ borderColor: this.state.asset_color, borderStyle: "solid" }}>
-                            <div className={'component ' + (this.state.account=='' ? 'hidden' : 'visible')}>
+                            <div className={'component '}>
                                 <h4> 
                                     {(() => {
                                         console.log(this.state.asset_selected)

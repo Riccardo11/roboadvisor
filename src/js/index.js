@@ -119,11 +119,16 @@ class Index extends React.Component {
         super(props);
         this.state = {pageActive: 6};
         this.setPage = this.setPage.bind(this);
+        this.getPage = this.getPage.bind(this);
         this.PAGES = [<Overview />,
                       <AssetAllocation />, <Transactions />,
                       <Performance />,
                       <Surveys setPage={this.setPage}/>, <SurveyResult />,
                       <Home setPage={this.setPage} />]
+    }
+
+    getPage() {
+        return (this.state.pageActive);
     }
 
     setPage(page, riskProfile) {
@@ -133,7 +138,6 @@ class Index extends React.Component {
         this.setState({
             pageActive: page
         });
-        console.log(this.state.pageActive);
     }
 
     render() {
@@ -143,7 +147,7 @@ class Index extends React.Component {
                 <Grid className="background">
                     <Row className={this.state.pageActive == 6 ? 'hidden' : 'visible'}>
                          {/*   <NavBar /> */}
-                         <NavbarComponent setPage={this.setPage} />
+                         <NavbarComponent setPage={this.setPage} getPage={this.getPage}/>
                     </Row>
                     <Row className="show-grid">
                         <Col>

@@ -88,12 +88,12 @@ class Overview extends React.Component {
                       <td>{this.state.account == 'A' ? this.state.nav : NAVMESSAGE}</td>
                     </tr>
                     
-                    <tr className={this.state.account == 'B' ? 'selected-nav-account' : ''}>
+                    {/*<tr className={this.state.account == 'B' ? 'selected-nav-account' : ''}>
                       <td>B</td>
                       <td>IRA</td>
                       <td>654321</td>
                       <td>{this.state.account == 'B' ? this.state.nav : NAVMESSAGE}</td>
-                    </tr>
+                    </tr>*/}
                   </tbody>
                 </Table>
 

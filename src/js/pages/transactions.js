@@ -19,10 +19,10 @@ class Transactions extends React.Component {
     render() {
         return(
             <div>
-                <div className='component'>
+                {/*<div className='component'>
                     <DropdownComponent getInfo={this.getAccount}/>
-                </div>
-                <div className={this.state.account=='' ? 'hidden' : 'visible'}>
+                </div>*/}
+                <div>
                     <div className='table-title'>
                         <h4> Recent Account Activity </h4>
                     </div>

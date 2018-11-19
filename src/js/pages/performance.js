@@ -18,10 +18,10 @@ class Performance extends React.Component {
     render() {
     	return (
     		<div>
-    			<div className="component">
+    			{/*<div className="component">
     				<DropdownComponent getInfo={this.getAccount} />
-    			</div>
-                <div className={'component ' + (this.state.account=='' ? 'hidden' : 'visible')}>
+    			</div>*/}
+                <div className={'component '}>
 					<Table striped bordered>
 						<thead>
 							<tr>
