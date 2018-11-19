@@ -22,9 +22,11 @@ function convertAmountOfData(amountOfData) {
         case "1":
             return 1000;
         case "2":
-            return 30;
+            return 20;
         case "3":
-            return 60;
+            return 120;
+        case "4":
+            return 240;
         default:
             alert("Errore nella richesta dell'ammontare di dati")
             break;

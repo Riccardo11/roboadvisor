@@ -25,9 +25,9 @@ class NavbarComponent extends React.Component {
                     <Navbar onSelect={this.changePage}>
                         <Nav>
                             {/*<LinkContainer to="/overview" exact={true}>*/}
-                                <NavItem eventKey={0}> 
-                                    <div className={(this.props.getPage() == 0) ? 'selected-navigation-item' : ''}>
-                                        <strong>Overview</strong>
+                                <NavItem eventKey={4}> 
+                                    <div className={(this.props.getPage() == 4) ? 'selected-navigation-item' : ''}>
+                                        <strong>Questionario</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
@@ -41,17 +41,22 @@ class NavbarComponent extends React.Component {
                             {/*<LinkContainer to="/transactions" exact={true}>*/}
                                 <NavItem eventKey={2}> 
                                     <div className={(this.props.getPage() == 2) ? 'selected-navigation-item' : ''}>
-                                        <strong>Transactions</strong>
+                                        <strong>Transazioni</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
                             {/*<LinkContainer to="/performance" exact={true}>*/}
                                 <NavItem eventKey={3}> 
                                     <div className={(this.props.getPage() == 3) ? 'selected-navigation-item' : ''}>
-                                        <strong>Performance</strong>
+                                        <strong>Rendimenti</strong>
                                     </div>
                                 </NavItem>
                             {/*</LinkContainer>*/}
+                                <NavItem eventKey={0}> 
+                                    <div className={(this.props.getPage() == 0) ? 'selected-navigation-item' : ''}>
+                                        <strong>Reportistica</strong>
+                                    </div>
+                                </NavItem>
                         </Nav>
                     </Navbar>
 

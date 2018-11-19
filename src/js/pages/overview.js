@@ -104,8 +104,9 @@ class Overview extends React.Component {
                         title={this.state.dropdown_text}
                     >
                         <MenuItem eventKey="1" onSelect={this.handleClickAmount}> Andamento per intero </MenuItem>
-                        <MenuItem eventKey="2" onSelect={this.handleClickAmount}> Ultime 30 rilevazioni </MenuItem>
-                        <MenuItem eventKey="3" onSelect={this.handleClickAmount}> Ultime 60 rilevazioni </MenuItem>
+                        <MenuItem eventKey="2" onSelect={this.handleClickAmount}> Ultimo mese </MenuItem>
+                        <MenuItem eventKey="3" onSelect={this.handleClickAmount}> Ultimi sei mesi </MenuItem>
+                        <MenuItem eventKey="4" onSelect={this.handleClickAmount}> Ultimo anno </MenuItem>
                     </DropdownButton>
                 </div>
 
