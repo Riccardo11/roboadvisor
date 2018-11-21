@@ -25,10 +25,10 @@ function myChart(account, isForSummary, updateTableFun) {
     return (new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Government Bond","Equity","Cash","High Yield"],
+            labels: ["Liquidità", "Azioni", "Obbligazioni", "Materie prime"],
             datasets: [{
-                label: 'Nav for every asset type',
-                data: [12000, 17000, 25000, 31000],
+                label: 'Asset Classes',
+                data: [0, 30, 70, 0],
                 backgroundColor: [
                     'rgba(153, 255, 153)',
                     'rgba(255, 255, 153)',
@@ -56,7 +56,7 @@ function myChart(account, isForSummary, updateTableFun) {
             },
             title: {
                 display: true,
-                text: account + ' - NAV for every asset type'
+                text: account + 'Asset Classes'
             },
             onClick: updateTableFun
         }

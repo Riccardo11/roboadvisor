@@ -5,6 +5,7 @@ import rendimentiTrimestraliChart from '../charts/rendimentiTrimestrali.js';
 import rendimentiVolatilitaChart from '../charts/rendimentiVolatilita.js';
 import perditaMassimaStoricaChart from '../charts/perditaMassimaStorica.js';
 // import extraRendimentoChart from '../charts/extraRendimento.js';
+import IEXClass from '../iex/iex.js';
 
 const NAVMESSAGE = "Click this line to see the NAV";
 
@@ -22,6 +23,7 @@ class Overview extends React.Component {
         this.handleClickNav = this.handleClickNav.bind(this);
         this.handleClickAmount = this.handleClickAmount.bind(this);        
         this.updateNavData = this.updateNavData.bind(this);
+
     }
 
     updateNavData(nav,maxdrawdown,myChart) {

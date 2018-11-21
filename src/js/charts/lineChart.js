@@ -1,6 +1,14 @@
 import Chart from 'chart.js';
 import getrefData from '../firebase/firebase.js';
 import maxDrawdown from '../lib/maxDrawdown.js';
+// import getIEXValues from '../iex/iex.js';
+
+const HOLDINGS = ['FEZ', 'VCLT', 'LQD', 'SHY', 'BND', 'IBND', 'EWI', 'SPY'];
+const URL = ("https://api.iextrading.com/1.0/stock/market/batch?symbols=" 
+             +
+             HOLDINGS.join()
+             +
+             '&types=chart&range=1y');
 
 function calculateNav(allSeries, shares) {
     // create an array of 0s
@@ -15,6 +23,30 @@ function calculateNav(allSeries, shares) {
     });
     console.log(nav);
     return nav;
+}
+
+function getCloseValuesFromJson(json) {
+
+    let closes = Array.apply(null, Array(json.FEZ.chart.length))
+                .map(Number.prototype.valueOf,0);
+
+
+    HOLDINGS.forEach(function (holding) {
+        json[holding].chart.forEach(function (point, i) {
+            closes[i] = closes[i] + point.close 
+        });
+    });
+    return closes
+}
+
+function getDateFromJson(json) {
+    // take one random holding from availables
+    const jsonStock = json.FEZ.chart;
+
+    const dates = jsonStock.map(function (point) {
+        return point.date
+    })
+    return dates
 }
 
 function convertAmountOfData(amountOfData) {
@@ -38,70 +70,81 @@ function navChart(account, updateNavData, amountOfData) {
     const ctx = document.getElementById('nav-chart');
 
     // parameters are not useful.. remove them
-    getrefData('exon','data').then(
-        function (snap) {
+
+    // getrefData('exon','data').then(
+    fetch(URL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
 
             // retreive data from Firebase
-            const data = snap.val();
+            // const data = snap.val();
 
-            // #### Exon Part ####
+            // // #### Exon Part ####
 
-            const exonDataArray = Object.values(Object.values(data)[0])[0];
+            // const exonDataArray = Object.values(Object.values(data)[0])[0];
 
-            // extract x values
-            let xExon = exonDataArray.map(
-                function(elem) {
-                    return Object.values(elem)[0];
-                }
-            );
+            // // extract x values
+            // let xExon = exonDataArray.map(
+            //     function(elem) {
+            //         return Object.values(elem)[0];
+            //     }
+            // );
 
             const amount = convertAmountOfData(amountOfData)
 
-            xExon = xExon.slice(xExon.length-amount,xExon.length);
+            // xExon = xExon.slice(xExon.length-amount,xExon.length);
 
-            // extract y values
-            let yExon = exonDataArray.map(
-                function(elem) {
-                    return Object.values(elem)[1];
-                }
-            );
+            // // extract y values
+            // let yExon = exonDataArray.map(
+            //     function(elem) {
+            //         return Object.values(elem)[1];
+            //     }
+            // );
 
-            yExon = yExon.slice(yExon.length-amount,yExon.length);
+            // yExon = yExon.slice(yExon.length-amount,yExon.length);
 
-            // get shares of Exon
-            const sharesExon = Object.values(Object.values(Object.values(data)[0])[1])[0];
-            console.log(sharesExon);
+            // // get shares of Exon
+            // const sharesExon = Object.values(Object.values(Object.values(data)[0])[1])[0];
+            // console.log(sharesExon);
 
-            // #### Google Part ####
+            // // #### Google Part ####
 
-            const googleDataArray = Object.values(Object.values(data)[1])[0];
+            // const googleDataArray = Object.values(Object.values(data)[1])[0];
 
-            // extract x values
-            let xGoogle = googleDataArray.map(
-                function(elem) {
-                    return Object.values(elem)[0];
-                }
-            );
+            // // extract x values
+            // let xGoogle = googleDataArray.map(
+            //     function(elem) {
+            //         return Object.values(elem)[0];
+            //     }
+            // );
 
-            xGoogle = xGoogle.slice(xGoogle.length-amount,xGoogle.length);
+            // xGoogle = xGoogle.slice(xGoogle.length-amount,xGoogle.length);
 
-            // extract y values
-            let yGoogle = googleDataArray.map(
-                function(elem) {
-                    return Object.values(elem)[1];
-                }
-            );
+            // // extract y values
+            // let yGoogle = googleDataArray.map(
+            //     function(elem) {
+            //         return Object.values(elem)[1];
+            //     }
+            // );
 
-            yGoogle = yGoogle.slice(yGoogle.length-amount,yGoogle.length); 
+            // yGoogle = yGoogle.slice(yGoogle.length-amount,yGoogle.length); 
 
-            // get shares of Google
-            const sharesGoogle = Object.values(Object.values(Object.values(data)[1])[1])[0];
+            // // get shares of Google
+            // const sharesGoogle = Object.values(Object.values(Object.values(data)[1])[1])[0];
 
 
             // ### Calculate NAV ###           
 
-            const nav = calculateNav([yExon,yGoogle],[sharesExon,sharesGoogle]);
+            // const nav = calculateNav([yExon,yGoogle],[sharesExon,sharesGoogle]);
+            // const nav = getCloseValuesFromJson(json)
 
+            let dates = getDateFromJson(json)
+            dates = dates.slice(dates.length-amount, dates.length)
+
+            let nav = getCloseValuesFromJson(json)
+            nav = nav.slice(nav.length-amount, nav.length)
 
             // calculate max drawdown values
             // maxDrawdownData[0] --> max drawdown value
@@ -109,17 +152,25 @@ function navChart(account, updateNavData, amountOfData) {
             // maxDrawdownData[2] --> max drawdown end
             const maxDrawdownData = maxDrawdown(nav);
 
+
             // calculate points corresponding to max drawdown
             const maxDrawdownpoints = nav.map(function(elem,i) {
                 return (i >= maxDrawdownData[1] && i <= maxDrawdownData[2]) ? elem : NaN;
             });
 
+            let comparisonData = []
+            for (let i=0; i < nav.length; i++) {
+                if (i == 0)
+                    comparisonData[i] = 10000000
+                else
+                    comparisonData[i] = comparisonData[i-1] + (Math.random() - 0.5) * 200000
+            }
 
             // draw chart
             let myChart = new Chart(ctx, {
                 type: 'line',
                 data : {
-                    labels: xExon,
+                    labels: dates,
                     datasets: 
                         [{
                             label: 'Max Drawdown',

@@ -91,13 +91,13 @@ class AssetAllocation extends React.Component {
                                     <Col md={4}> <strong> Current Value </strong> </Col> 
                                 </Row>
                                 <hr />
-                                <div className={"component " + (((this.state.asset_selected== 'all') || (this.state.asset_selected == 'Government Bond')) ? 'visible' : 'hidden')}>
+                                <div className={"component " + (((this.state.asset_selected== 'all') || (this.state.asset_selected == 'Azioni')) ? 'visible' : 'hidden')}>
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-a" href="#"> Holding bond a </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-a" href="#"> Fez.iex </a> </Col> 
                                         <Col md={4}> 
-                                            11% 
+                                            12% 
                                             <span className={"asset-bar"}
-                                                  style={{backgroundColor: 'rgba(153, 255, 153)', width: '11%'}}
+                                                  style={{backgroundColor: 'rgba(255, 255, 153)', width: '12%'}}
                                             >
                                             </span> 
                                         </Col> 
@@ -122,12 +122,13 @@ class AssetAllocation extends React.Component {
                                                 </Table>
                                         </div>
                                     </Collapse>
+
                                     <Row>
-                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-b" href="#"> Holding bond b </a> </Col> 
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bond-b" href="#"> Ewi.iex </a> </Col> 
                                         <Col md={4}> 
-                                            3%
+                                            8%
                                             <span className={"asset-bar"}
-                                                  style={{backgroundColor: 'rgba(153, 255, 153)', width: '3%'}}
+                                                  style={{backgroundColor: 'rgba(255, 255, 153)', width: '8%'}}
                                             >
                                             </span> 
                                         </Col>
@@ -152,8 +153,198 @@ class AssetAllocation extends React.Component {
                                                 </Table>
                                         </div>
                                     </Collapse>
+
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="spy" href="#"> Spy.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            10%
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(255, 255, 153)', width: '10%'}}
+                                            >
+                                            </span> 
+                                        </Col>
+                                        <Col md={4}> 12.543$ </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='spy' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
                                 </div>
 
+                                <div  className={"component " + (this.state.asset_selected== 'all' || this.state.asset_selected == 'Obbligazioni' ? 'visible' : 'hidden')}>
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="vclt" href="#"> Vclt.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            8% 
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(102, 255, 255)', width: '8%'}}
+                                            >
+                                            </span> 
+                                        </Col> 
+                                        <Col md={4}> 12.543.345$  </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='vclt' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
+
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="lqd" href="#"> Lqd.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            8% 
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(102, 255, 255)', width: '8%'}}
+                                            >
+                                            </span> 
+                                        </Col> 
+                                        <Col md={4}> 12.543$  </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='lqd' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
+
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="shy" href="#"> Shy.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            10% 
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(102, 255, 255)', width: '10%'}}
+                                            >
+                                            </span> 
+                                        </Col> 
+                                        <Col md={4}> 543.345$  </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='shy' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
+
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="bnd" href="#"> Bnd.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            24% 
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(102, 255, 255)', width: '24%'}}
+                                            >
+                                            </span> 
+                                        </Col> 
+                                        <Col md={4}> 12.543.345$  </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='bnd' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
+
+                                    <Row>
+                                        <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="ibnd" href="#"> Ibnd.iex </a> </Col> 
+                                        <Col md={4}> 
+                                            20% 
+                                            <span className={"asset-bar"}
+                                                  style={{backgroundColor: 'rgba(102, 255, 255)', width: '20%'}}
+                                            >
+                                            </span> 
+                                        </Col> 
+                                        <Col md={4}> 12.543.345$  </Col> 
+                                    </Row>
+                                    <Collapse in={this.state.show_details=='ibnd' ? true : false}>
+                                        <div>
+                                            <Table striped bordered condensed hover>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Security </th>
+                                                            <th> Asset Type </th>
+                                                            <th> Data d'acquisto </th>
+                                                            <th> Prezzo d'acquisto </th>
+                                                            <th> # Shares </th>
+                                                            <th> PNL </th>
+                                                            <th> Actual Market Value </th>
+                                                            <th> Historical Volatility </th>
+                                                            <th> Sharpe Ratio </th>
+                                                        </tr>
+                                                    </thead>
+                                                </Table>
+                                        </div>
+                                    </Collapse>
+
+                                </div>
+
+                                {/*
                                 <div  className={"component " + (this.state.asset_selected== 'all' || this.state.asset_selected == 'Cash' ? 'visible' : 'hidden')}>
                                     <Row>
                                         <Col md={4} onClick={this.showHoldingDetail}> <a className="asset-item" id="cash-a" href="#"> Holding cash a </a> </Col> 
@@ -342,6 +533,7 @@ class AssetAllocation extends React.Component {
                                         </div>
                                     </Collapse>
                                 </div>
+                            */}
 
                             </div>
 
